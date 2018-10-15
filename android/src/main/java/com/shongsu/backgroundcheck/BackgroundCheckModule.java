@@ -81,6 +81,11 @@ public class BackgroundCheckModule extends ReactContextBaseJavaModule {
         Window window = currentActivity.getWindow();
 
         window.addFlags(flags);
+
+        Context context = currentActivity.getApplicationContext();
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock mWakeLock = pm.newWakeLock((PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "mockingbird");
+        mWakeLock.acquire(1000);
       }
     });
   }
